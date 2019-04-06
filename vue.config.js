@@ -16,6 +16,44 @@
                  //        xinxi
                  //    })
                  // })
+                 // 注册接口
+                  // 模拟数据库已经注册的用户
+                 let userpoor = [
+                     {username: 'yanghui',password:'123456'}
+                 ]
+                 app.get('/api/register',(req,res)=>{
+                     const {username,password} = req.query;
+                     const userlength = userpoor.filter(v=>v.username = username).length;
+                     if (userlength > 0) {
+                        res.json({
+                            success:false,
+                            message:'用户名已存在'
+                        })
+                     } else{
+                         res.json({
+                             success:true,
+                             message:'注册成功'
+                         })
+                    }
+                 })
+                 // 登录接口
+                 let tokenkey = 'yanghui';
+                 app.get('/api/login',(req,res)=>{
+                     const {username,password} = req.query;
+                     var queryData = req.query;
+                     if(queryData.username == 'yanghui' && queryData.password == '123456') {
+                         res.json({
+                            code:'0000',
+                            message:'登录成功',
+                             token:tokenkey + '-' + username
+                         })
+                     } else {
+                         res.json({
+                             code:'0001',
+                             message:'登录失败'
+                         })
+                     }
+                 })
              }
          }
      },

@@ -8,11 +8,19 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    // 路径为/重定向到login
     {
       path: '/',
-      name: 'register',
-      component: Register
+      name: 'login',
+      redirect:'/login'
     },
+    // 注册
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
+    },
+    // 登录
     {
       path: '/login',
       name: 'login',

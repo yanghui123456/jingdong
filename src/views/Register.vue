@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="register">
+        <img class="headimg" src="//img.alicdn.com/imgextra/i1/78/O1CN01BC1ujS1CRlPC2AddJ_!!78-0-luban.jpg" alt="">
         <cube-form
                 :model="model"
                 :schema="schema"
@@ -11,15 +12,15 @@ export default{
     data() {
         return{
             model:{
-                userName:'',
-                passWord:''
+                username:'',
+                password:''
             },
             schema:{
                 fields:[
                     // 用户名配置
                     {
                         type: 'input',
-                        modelKey: 'userName',
+                        modelKey: 'username',
                         label:'用户名',
                         props: {
                             placeholder:'请输入用户名'
@@ -41,7 +42,7 @@ export default{
                     // 密码配置
                     {
                         type: 'input',
-                        modelKey: 'passWord',
+                        modelKey: 'password',
                         label:'密码',
                         props: {
                             placeholder:'请输入密码',
@@ -75,8 +76,22 @@ export default{
         submitHandler(e) {
             e.preventDefault(); // 阻止表单的默认事件，刷新页面
             console.log('注册了')
+            // 自己写的接口
+            this.$http.get('/api/register',{
+                params:this.model
+            }).then(res=>{
+                console.log('注册成功')
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
         }
     }
 }
 </script>
-<style scoped lang="stylus"></style>
+<style scoped lang="stylus">
+    .register
+        .headimg
+            width:100%;
+            height:150px;
+</style>
